@@ -1,4 +1,4 @@
 import re
-st = "qwer<a href = "">qwerty</a>qwer"
-arr2 = re.findall(r'<a[^>]*>([^<]+)</a>', st)
-print(arr2)
+ret = "<div><b>Bold</b><a href=\"link\">content</a><strong>qwre</strong></div>"
+ret = re.findall(r'<([^\s/>]+)',  ret) 
+print(ret)
