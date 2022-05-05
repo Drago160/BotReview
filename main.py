@@ -12,9 +12,8 @@ def lalala(message):
     for answer in Ans:
         if len(str(answer))>3:
             answer = str(answer)
-            answer = "["+answer+"](" + "https://stackoverflow.com/questions/33757661/how-could-you-increase-the-maximum-recursion-depth-in-python" + ")"
+            #answer = "["+answer+"](" + "https://stackoverflow.com/questions/33757661/how-could-you-increase-the-maximum-recursion-depth-in-python" + ")"
             bot.send_message(message.chat.id, answer, parse_mode='markdown')
-            #bot.send_message(message.chat.id, answer, parse_mode = "MarkfownV2")
 
 #RUN
 bot.polling(none_stop=True)
