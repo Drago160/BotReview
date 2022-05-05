@@ -19,7 +19,6 @@ class Parser:
         ip = Error_name + "python stacoverflow"
         # Перебираем url'ы
         for url in search(ip, stop=2):
-            print(url)
             # Если в названии есть наш сайт
             if url.find("stackoverflow"): 
                 # Находим все интересные нам блоки

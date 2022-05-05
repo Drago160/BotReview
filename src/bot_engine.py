@@ -1,11 +1,6 @@
 from src.parser import Parser
 from src.handler import Handler
-
-def str_sum(strings):
-    ret = ""
-    for s in strings:
-        ret += s
-    return ret
+from src.Toolfunc import str_sum
 
 class Engine():
 
