@@ -7,6 +7,7 @@ class Engine():
     def __init__(self):
         self.parser = Parser()
         self.handler = Handler()
+        self.num = 2
    
     def define(self, message):
         return True

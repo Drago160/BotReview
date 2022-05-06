@@ -35,6 +35,8 @@ def webhook():
 
 @bot.message_handler(content_types=['text'])
 def lalala(message):
+    bot.send_message(message.chat.id, str(engine.num))
+    engine.num = 1
     if engine.define(message):
         Ans = engine.find_answer_on_error(message.text)
         for part in Ans:
@@ -51,7 +53,6 @@ def lalala(message):
                             isFirstAns = False
 
                     bot.send_message(message.chat.id, answer, parse_mode = 'HTML')
-#RUN
 #bot.polling(none_stop=True)
 
 if __name__ == '__main__':
