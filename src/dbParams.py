@@ -26,17 +26,21 @@ class Client:
             self.reqData.questNum = int(text)
             self.howManyQuestFlag = False 
             self.howManyAnsFlag = True 
+            return True
         else:
             self.howManyQuestFlag = False 
-            self.howManyAnsFlag = False 
+            self.howManyAnsFlag = False
+            return False
 
 
     def updateAnsNum(self, text):
         if text.isdigit():
             self.reqData.ansNum = int(text)
             self.howManyAnsFlag = False 
+            return True
         else:
             self.howManyQuestFlag = False 
             self.howManyAnsFlag = False 
+            return False
 
 
