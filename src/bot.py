@@ -102,7 +102,7 @@ def lalala(message):
 
     elif client.howManyAnsFlag: 
         bot.send_message(message.chat.id, "Введите кол-во ответов")
-        if not client.updateAnsNum(message.text)
+        if not client.updateAnsNum(message.text):
             bot.send_message(message.chat.id, "Отмена")
         else:
             bot.send_message(message.chat.id, "Успех")

@@ -34,6 +34,6 @@ class Parser:
                     for inf_block in block: # заполняем ответ
                         ans.append(inf_block)
                     answers.append(ans)
-                    if counter >= reqData.ansNum:# если достаточно ответов
+                    if counter > reqData.ansNum:# если достаточно ответов
                         break 
                 yield answers 

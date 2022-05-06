@@ -35,7 +35,7 @@ class Client:
 
     def updateAnsNum(self, text):
         if text.isdigit():
-            self.reqData.ansNum = int(text)
+            self.reqData.ansNum = max(int(text), 1)
             self.howManyAnsFlag = False 
             return True
         else:
