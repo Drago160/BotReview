@@ -20,6 +20,10 @@ clients = {}
 def start(message):
     bot.reply_to(message, "Hello, " + message.from_user.first_name)
 
+@bot.message_handler(commands=['help'])
+def start(message):
+    bot.reply_to(message, HELP_MESSAGE)
+
 @server.route('/' + TOKEN, methods=['POST'])
 def get_message():
     json_string = request.get_data().decode('utf-8')
