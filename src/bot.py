@@ -43,15 +43,14 @@ def help(message):
     client.askFlag = True
     bot.send_message(message.chat.id, PHRASES.WAIT_FOR_QUESTION, parse_mode = 'HTML')
 
-@bot.message_handler(commands=['/changerules'])
+@bot.message_handler(commands=['changerules'])
 def change(message):
     client = logIn(message.chat.id)
-    bot.send_message(message.chat.id, PHRASES.HOW_MANY_QUEST, parse_mode = "HTML")
     markup = types.ReplyKeyboardMarkup(resize_keyboard=True)
     button1 = types.KeyboardButton("1")
     button2 = types.KeyboardButton("2")
     markup.add(button1, button2)
-
+    bot.send_message(message.chat.id, PHRASES.HOW_MANY_QUEST, reply_markup = markup, parse_mode = "HTML")
 
 @server.route('/' + TOKEN, methods=['POST'])
 def get_message():
