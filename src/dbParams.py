@@ -3,6 +3,7 @@ class RequestData:
     def __init__(self, questNum, ansNum):
         self.questNum = questNum 
         self.ansNum = ansNum 
+        self.askFlag = False
 
     def change(self, questNum, ansNum):
         self.questNum = questNum

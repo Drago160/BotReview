@@ -16,6 +16,18 @@ engine = Engine()
 
 clients = {} 
 
+def register(my_id):
+    clients[my_id] = Client(my_id)
+    return clients[my_id] 
+
+
+def logIn(id):
+    if id in clients:
+        return clients[id]
+    else:
+        return register(id)
+
+
 @bot.message_handler(commands=['start'])
 def start(message):
     bot.reply_to(message, "Hello, " + message.from_user.first_name)
@@ -24,6 +36,12 @@ def start(message):
 def help(message):
     bot.send_message(message.chat.id, PHRASES.HELP_MESSAGE, parse_mode = 'HTML')
 
+@bot.message_handler(commands=['find'])
+def help(message):
+    client = logIn(message.chat.id)
+    client.askFlag = True
+    bot.send_message(message.chat.id, PHRASES.WAIT_FOR_QUESTION, parse_mode = 'HTML')
+
 @server.route('/' + TOKEN, methods=['POST'])
 def get_message():
     json_string = request.get_data().decode('utf-8')
@@ -31,16 +49,13 @@ def get_message():
     bot.process_new_updates([update])
     return '!', 200
 
+
 @server.route('/')
 def webhook():
     bot.remove_webhook()
     bot.set_webhook(url=APP_URL)
     return '!', 200
 
-
-def register(my_id):
-    clients[my_id] = Client(my_id)
-    return clients[my_id] 
 
 
 def workError(message, client):
@@ -64,11 +79,10 @@ def workError(message, client):
 
 @bot.message_handler(content_types=['text'])
 def lalala(message):
-    if message.from_user.id in clients:
-        client = clients[message.from_user.id]
-    else:
-        client = register(message.from_user.id)
 
-    if engine.define(message):
+    client = logIn(message.chat.id)
+
+    if client.askFlag:
+        client.askFlag = False
         workError(message, client)
 
