@@ -33,7 +33,6 @@ def webhook():
     return '!', 200
 
 def searchRequest(message, client):
-    bot.send_message(message.cht.id, "!!!")
     Ans = engine.find_answer_on_error(message.text, client.reqData)
     for part in Ans:
         isQuestion = True
@@ -52,7 +51,7 @@ def searchRequest(message, client):
  
 
 def register(my_id):
-    clients[my_di] = Client()
+    clients[my_id] = Client(my_id)
     return clients[my_id] 
 
 
