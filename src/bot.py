@@ -1,5 +1,5 @@
 import telebot
-import config
+import src.config
 from src.bot_engine import Engine
 import PHRASES
 import os
