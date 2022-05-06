@@ -43,7 +43,7 @@ def help(message):
     client.askFlag = True
     bot.send_message(message.chat.id, PHRASES.WAIT_FOR_QUESTION, parse_mode = 'HTML')
 
-@bot.message_handler(commands=['changerules'])
+@bot.message_handler(commands=['changerule'])
 def change(message):
     client = logIn(message.chat.id)
     markup = types.ReplyKeyboardMarkup(resize_keyboard=True)
