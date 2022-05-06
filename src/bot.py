@@ -17,6 +17,14 @@ engine = Engine()
 
 clients = {} 
 
+markup = types.ReplyKeyboardMarkup(resize_keyboard=True)
+buttonStart = types.KeyboardButton("/start")
+buttonFind = types.KeyboardButton("/find")
+buttonChangeRule = types.KeyboardButton("/changerule")
+buttonHelp = types.KeyboardButton("/help")
+markup.add(buttonStart, buttonFind, buttonChangeRule, buttonHelp)
+
+
 def register(my_id):
     clients[my_id] = Client(my_id)
     return clients[my_id] 
@@ -35,7 +43,7 @@ def start(message):
 
 @bot.message_handler(commands=['help'])
 def help(message):
-    bot.send_message(message.chat.id, PHRASES.HELP_MESSAGE, parse_mode = 'HTML')
+    bot.send_message(message.chat.id, PHRASES.HELP_MESSAGE, reply_markup = markup, parse_mode = 'HTML')
 
 @bot.message_handler(commands=['find'])
 def help(message):
@@ -46,11 +54,10 @@ def help(message):
 @bot.message_handler(commands=['changerule'])
 def change(message):
     client = logIn(message.chat.id)
-    markup = types.ReplyKeyboardMarkup(resize_keyboard=True)
     button1 = types.KeyboardButton("1")
     button2 = types.KeyboardButton("2")
-    markup.add(button1, button2)
-    bot.send_message(message.chat.id, PHRASES.HOW_MANY_QUEST, reply_markup = markup, parse_mode = "HTML")
+    inputMarkup.add(button1, button2)
+    bot.send_message(message.chat.id, PHRASES.HOW_MANY_QUEST, reply_markup = inputMarkup, parse_mode = "HTML")
     client.howManyQuestFlag = True
 
 @server.route('/' + TOKEN, methods=['POST'])
@@ -82,7 +89,7 @@ def workError(message, client):
                     if isFirstAns:
                         bot.send_message(message.chat.id, PHRASES.ANSWER, parse_mode = 'HTML')
                         isFirstAns = False
-                bot.send_message(message.chat.id, answer, parse_mode = 'HTML')
+                bot.send_message(message.chat.id, answer, reply_markup = markup, parse_mode = 'HTML')
  
 
 
@@ -98,11 +105,11 @@ def lalala(message):
         if not client.updateQuestNum(message.text):
             pass 
         else:
-            bot.send_message(message.chat.id, PHRASES.SUCCESS_QUEST_MESSAGE, parse_mode="HTML")
+            bot.send_message(message.chat.id, PHRASES.SUCCESS_QUEST_MESSAGE, reply_markup = markup, parse_mode="HTML")
 
     elif client.howManyAnsFlag: 
         if not client.updateAnsNum(message.text):
             pass 
         else:
-            bot.send_message(message.chat.id, PHRASES.SUCCESS_ANS_MESSAGE, parse_mode = "HTML") 
+            bot.send_message(message.chat.id, PHRASES.SUCCESS_ANS_MESSAGE, reply_markup = markup, parse_mode = "HTML") 
 
