@@ -40,13 +40,11 @@ def register(my_id):
 
 
 def workError(message, client):
-    bot.send_message(message.chat.id, "2")
     Ans = engine.find_answer_on_error(message.text, client.reqData)
-    bot.send_message(message.chat.id, "3")
     for part in Ans:
         isQuestion = True
         for answer in part:
-            if len(answer)>2:
+            if len(answer)>5:
                 if isQuestion:
                     bot.send_message(message.chat.id, PHRASES.QUESTION, parse_mode = 'HTML')
 
@@ -69,6 +67,5 @@ def lalala(message):
         client = register(message.from_user.id)
 
     if engine.define(message):
-        bot.send_message(message.chat.id, "1")
         workError(message, client)
 
