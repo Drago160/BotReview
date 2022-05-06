@@ -7,7 +7,7 @@ from flask import Flask, request
 from src.dbParams import Client, RequestData
 
 TOKEN = config.TOKEN
-APP_URL = src.APP_URL 
+APP_URL = config.APP_URL 
 
 bot = telebot.TeleBot(TOKEN)
 
