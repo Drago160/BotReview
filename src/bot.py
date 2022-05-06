@@ -20,9 +20,9 @@ clients = {}
 def start(message):
     bot.reply_to(message, "Hello, " + message.from_user.first_name)
 
-@bot.message_handler(commands=['help'])
-def start(message):
-    bot.reply_to(message, PHRASES.HELP_MESSAGE)
+#@bot.message_handler(commands=['help'])
+#def start(message):
+#    bot.reply_to(message, PHRASES.HELP_MESSAGE)
 
 @server.route('/' + TOKEN, methods=['POST'])
 def get_message():
