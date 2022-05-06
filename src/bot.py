@@ -97,7 +97,7 @@ def lalala(message):
         if not client.updateQuestNum(message.text):
             bot.send_message(message.chat.id, "Отмена")
         else:
-            bot.send_message(message.chat.id, PHRASES.SUCCEESS_ANSWER, parse_mode="HTML")
+            bot.send_message(message.chat.id, PHRASES.SUCCEESS_QUEST_ANSWER, parse_mode="HTML")
 
     elif client.howManyAnsFlag: 
         if not client.updateAnsNum(message.text):
