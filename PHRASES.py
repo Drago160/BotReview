@@ -7,7 +7,7 @@ HELP_MESSAGE = "<b>Справочная информация обо мне:</b>\
 ####CHANGE####
 
 HOW_MANY_QUEST = "<b>Сколько запросов мне искать?</b>"
-SUCCESS_QUEST_MESSAGE = "<b>Сколько запросов мне искать?</b>"
+SUCCESS_QUEST_MESSAGE = "<b>Сколько Ответов мне нужно найти?</b>"
 
 SUCCESS_ANS_MESSAGE = "<b>Юху! Теперь я знаю что мне делать</b>"
 

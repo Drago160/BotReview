@@ -94,14 +94,12 @@ def lalala(message):
     if client.askFlag:
         workError(message, client)
     elif client.howManyQuestFlag:
-        bot.send_message(message.chat.id, "Введите кол-во запросов")
         if not client.updateQuestNum(message.text):
             bot.send_message(message.chat.id, "Отмена")
         else:
             bot.send_message(message.chat.id, PHRASES.SUCCEESS_ANSWER, parse_mode="HTML")
 
     elif client.howManyAnsFlag: 
-        bot.send_message(message.chat.id, "Введите кол-во ответов")
         if not client.updateAnsNum(message.text):
             bot.send_message(message.chat.id, "Успех")
         else:
