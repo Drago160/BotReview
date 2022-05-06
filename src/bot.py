@@ -40,7 +40,6 @@ def register(my_id):
 
 
 def searchRequest(message, client):
-    bot.send_message(message.cht.id, "1")
     Ans = engine.find_answer_on_error(message.text, client.reqData)
     for part in Ans:
         isQuestion = True
@@ -66,11 +65,6 @@ def lalala(message):
     else:
         client = register(message.from_user.id)
 
-        bot.send_message(message.cht.id, "3")
-
     if engine.define(message):
-        bot.send_message(message.cht.id, "4")
         searchRequest(message, client)
-
-        bot.send_message(message.cht.id, "5")
 
