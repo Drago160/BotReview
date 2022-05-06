@@ -13,6 +13,7 @@ bot = telebot.TeleBot(TOKEN)
 
 server = Flask(__name__)
 engine = Engine()
+
 clients = {} 
 
 @bot.message_handler(commands=['start'])
@@ -34,9 +35,7 @@ def webhook():
 
 
 def register(my_id):
-    bot.send_message(my_id, "reg start")
     clients[my_id] = Client(my_id)
-    bot.send_message(my_id, "reg end")
     return clients[my_id] 
 
 
@@ -63,13 +62,10 @@ def searchRequest(message, client):
 @bot.message_handler(content_types=['text'])
 def lalala(message):
     if message.from_user.id in clients:
-        bot.send_message(message.chat.id, "0")
         client = clients[message.from_user.id]
-        bot.send_message(message.chat.id, "1")
     else:
-        bot.send_message(message.chat.id, "2")
         client = register(message.from_user.id)
-    bot.send_message(message.cht.id, "3")
     if engine.define(message):
+        bot.send_message(message.cht.id, "3")
         searchRequest(message, client)
 
