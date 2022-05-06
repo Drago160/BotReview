@@ -33,6 +33,7 @@ def webhook():
     return '!', 200
 
 def searchRequest(message, client):
+    bot.send_message(message.cht.id, "!!!")
     Ans = engine.find_answer_on_error(message.text, client.reqData)
     for part in Ans:
         isQuestion = True
