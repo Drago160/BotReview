@@ -51,7 +51,6 @@ def workError(message, client):
             if len(answer)>5:
                 if isQuestion:
                     bot.send_message(message.chat.id, PHRASES.QUESTION, parse_mode = 'HTML')
-
                     isQuestion = False
                     isFirstAns = True
                 else:
