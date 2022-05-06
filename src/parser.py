@@ -2,6 +2,7 @@ from bs4 import BeautifulSoup as BS
 import requests
 from googlesearch import search
 import src.Toolfunc as Toolfunc 
+from src.dbParams import RequestData
 
 class Parser:
 
@@ -15,10 +16,10 @@ class Parser:
         return divs
 
 
-    def find_answers(self, Error_name, num = 5):
+    def find_answers(self, Error_name, reqData):
         ip = Error_name + "python stacoverflow"
         # Перебираем url'ы
-        for url in search(ip, stop=2):
+        for url in search(ip, stop=reqData.questNum):
             # Если в названии есть наш сайт
             if url.find("stackoverflow"): 
                 # Находим все интересные нам блоки
@@ -33,6 +34,6 @@ class Parser:
                     for inf_block in block: # заполняем ответ
                         ans.append(inf_block)
                     answers.append(ans)
-                    if counter >= num:# если уже достаточно ответов для нас
+                    if counter >= reqData.ansNum:# если уже достаточно ответов для нас
                         break 
                 yield answers 
