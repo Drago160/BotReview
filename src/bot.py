@@ -22,7 +22,7 @@ def start(message):
 
 @bot.message_handler(commands=['help'])
 def start(message):
-    bot.reply_to(message, HELP_MESSAGE)
+    bot.reply_to(message, PHRASES.HELP_MESSAGE)
 
 @server.route('/' + TOKEN, methods=['POST'])
 def get_message():
