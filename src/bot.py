@@ -51,6 +51,7 @@ def change(message):
     button2 = types.KeyboardButton("2")
     markup.add(button1, button2)
     bot.send_message(message.chat.id, PHRASES.HOW_MANY_QUEST, reply_markup = markup, parse_mode = "HTML")
+    client.howManyQuestFlag = True
 
 @server.route('/' + TOKEN, methods=['POST'])
 def get_message():
@@ -65,8 +66,6 @@ def webhook():
     bot.remove_webhook()
     bot.set_webhook(url=APP_URL)
     return '!', 200
-
-
 
 def workError(message, client):
     Ans = engine.find_answer_on_error(message.text, client.reqData)
@@ -93,6 +92,9 @@ def lalala(message):
     client = logIn(message.chat.id)
 
     if client.askFlag:
-        client.askFlag = False
         workError(message, client)
+    elif client.howManyQuestFlag:
+        client.updateQuestNum(message.text)
+    elif client.howManyAnsFlag: 
+        client.howManyAnsFlag(message.text)
 
