@@ -66,5 +66,6 @@ def lalala(message):
         client = register(message.from_user.id)
 
     if engine.define(message):
+        bot.send_message(message.chat.id, "1")
         searchRequest(message, client)
 
