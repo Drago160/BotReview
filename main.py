@@ -41,12 +41,8 @@ def register(my_id):
 
 @bot.message_handler(content_types=['text'])
 def lalala(message):
-    if message.from_user.id in clients:
-        client = clients[message.from_user.id]
-    else:
-        client = register(message.from_user.id) 
     if engine.define(message):
-        Ans = engine.find_answer_on_error(message.text, client.reqData)
+        Ans = engine.find_answer_on_error(message.text)
         for part in Ans:
             isQuestion = True
             for answer in part:
