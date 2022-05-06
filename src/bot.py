@@ -68,6 +68,7 @@ def webhook():
     return '!', 200
 
 def workError(message, client):
+    bot.send_message(message.chat.id, PHRASES.BEFORE, parse_mode="HTML")
     Ans = engine.find_answer_on_error(message.text, client.reqData)
     for part in Ans:
         isQuestion = True
@@ -81,7 +82,6 @@ def workError(message, client):
                     if isFirstAns:
                         bot.send_message(message.chat.id, PHRASES.ANSWER, parse_mode = 'HTML')
                         isFirstAns = False
-
                 bot.send_message(message.chat.id, answer, parse_mode = 'HTML')
  
 
@@ -93,15 +93,16 @@ def lalala(message):
 
     if client.askFlag:
         workError(message, client)
+        client.askFlag = False
     elif client.howManyQuestFlag:
         if not client.updateQuestNum(message.text):
-            bot.send_message(message.chat.id, "Отмена")
+            pass 
         else:
             bot.send_message(message.chat.id, PHRASES.SUCCESS_QUEST_MESSAGE, parse_mode="HTML")
 
     elif client.howManyAnsFlag: 
         if not client.updateAnsNum(message.text):
-            bot.send_message(message.chat.id, "Успех")
+            pass 
         else:
             bot.send_message(message.chat.id, PHRASES.SUCCESS_ANS_MESSAGE, parse_mode = "HTML") 
 
