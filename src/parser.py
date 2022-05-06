@@ -19,7 +19,7 @@ class Parser:
     def find_answers(self, Error_name, reqData):
         ip = Error_name + "python stacoverflow"
         # Перебираем url'ы
-        for url in search(ip, stop=reqData.ansNum):
+        for url in search(ip, stop=reqData.questNum):
             # Если в названии есть наш сайт
             if url.find("stackoverflow"): 
                 # Находим все интересные нам блоки
@@ -34,6 +34,6 @@ class Parser:
                     for inf_block in block: # заполняем ответ
                         ans.append(inf_block)
                     answers.append(ans)
-                    if counter >= reqData.questNum:# если достаточно ответов
+                    if counter >= reqData.ansNum:# если достаточно ответов
                         break 
                 yield answers 
