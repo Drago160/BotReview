@@ -13,7 +13,7 @@ bot = telebot.TeleBot(TOKEN)
 
 server = Flask(__name__)
 engine = Engine()
-Clients = {} 
+clients = {} 
 
 @bot.message_handler(commands=['start'])
 def start(message):
@@ -32,6 +32,23 @@ def webhook():
     bot.set_webhook(url=APP_URL)
     return '!', 200
 
+def searchRequest(message, client):
+    Ans = engine.find_answer_on_error(message.text, client.reqData)
+    for part in Ans:
+        isQuestion = True
+        for answer in part:
+            if len(answer)>2:
+                if isQuestion:
+                    bot.send_message(message.chat.id, PHRASES.QUESTION, parse_mode = 'HTML')
+                    isQuestion = False
+                    isFirstAns = True
+                else:
+                    if isFirstAns:
+                        bot.send_message(message.chat.id, PHRASES.ANSWER, parse_mode = 'HTML')
+                        isFirstAns = False
+
+                bot.send_message(message.chat.id, answer, parse_mode = 'HTML')
+ 
 
 def register(my_id):
     clients[my_di] = Client()
@@ -40,20 +57,10 @@ def register(my_id):
 
 @bot.message_handler(content_types=['text'])
 def lalala(message):
+    if message.from_user.id in clients:
+        client = clients[message.from_user.id]
+    else:
+        client = register(message.from_user.id)
     if engine.define(message):
-        Ans = engine.find_answer_on_error(message.text)
-        for part in Ans:
-            isQuestion = True
-            for answer in part:
-                if len(answer)>2:
-                    if isQuestion:
-                        bot.send_message(message.chat.id, PHRASES.QUESTION, parse_mode = 'HTML')
-                        isQuestion = False
-                        isFirstAns = True
-                    else:
-                        if isFirstAns:
-                            bot.send_message(message.chat.id, PHRASES.ANSWER, parse_mode = 'HTML')
-                            isFirstAns = False
+        workError(message, client)
 
-                    bot.send_message(message.chat.id, answer, parse_mode = 'HTML')
-#bot.polling(none_stop=True)
