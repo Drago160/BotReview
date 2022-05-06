@@ -32,7 +32,14 @@ def webhook():
     bot.set_webhook(url=APP_URL)
     return '!', 200
 
+
+def register(my_id):
+    clients[my_id] = Client(my_id)
+    return clients[my_id] 
+
+
 def searchRequest(message, client):
+    bot.send_message(message.cht.id, "1")
     Ans = engine.find_answer_on_error(message.text, client.reqData)
     for part in Ans:
         isQuestion = True
@@ -50,17 +57,15 @@ def searchRequest(message, client):
                 bot.send_message(message.chat.id, answer, parse_mode = 'HTML')
  
 
-def register(my_id):
-    clients[my_id] = Client(my_id)
-    return clients[my_id] 
-
 
 @bot.message_handler(content_types=['text'])
 def lalala(message):
+    bot.send_message(message.chat.id, "0")
     if message.from_user.id in clients:
         client = clients[message.from_user.id]
     else:
         client = register(message.from_user.id)
+    bot.send_message(message.cht.id, "1")
     if engine.define(message):
         searchRequest(message, client)
 
