@@ -62,5 +62,5 @@ def lalala(message):
     else:
         client = register(message.from_user.id)
     if engine.define(message):
-        searchReques(message, client)
+        searchRequest(message, client)
 
