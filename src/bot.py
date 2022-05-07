@@ -72,7 +72,7 @@ def to_find(message):
 @bot.message_handler(commands=['changerule'])
 def change(message):
     client = logIn(message.chat.id)
-        bot.send_message(message.chat.id, PHRASES.HOW_MANY_QUEST, reply_markup = inputMarkup, parse_mode = "HTML")
+    bot.send_message(message.chat.id, PHRASES.HOW_MANY_QUEST, reply_markup = inputMarkup, parse_mode = "HTML")
     client.howManyQuestFlag = True
 
 @bot.message_handler(func = lambda message: message.text == "changerule")
