@@ -25,6 +25,14 @@ buttonHelp = types.KeyboardButton("help")
 markup.add(buttonStart, buttonFind, buttonChangeRule, buttonHelp)
 
 
+inputMarkup = types.ReplyKeyboardMarkup(resize_keyboard=True)
+button1 = types.KeyboardButton("1")
+button2 = types.KeyboardButton("2")
+button3 = types.KeyboardButton("3")
+button4 = types.KeyboardButton("4")
+button5 = types.KeyboardButton("5")
+inputMarkup.add(button1, button2, button3, button4, button5)
+
 def register(my_id):
     clients[my_id] = Client(my_id)
     return clients[my_id] 
@@ -39,7 +47,7 @@ def logIn(id):
 def start(message):
     bot.reply_to(message, "Hello, " + message.from_user.first_name, reply_markup = markup)
 
-@bot.message_handler(func = labmda message: message.text == "start")
+@bot.message_handler(func = lambda message: message.text == "start")
 def to_start(message):
     start(message)
 
@@ -47,7 +55,7 @@ def to_start(message):
 def helper(message):
     bot.send_message(message.chat.id, PHRASES.HELP_MESSAGE, reply_markup = markup, parse_mode = 'HTML')
 
-@bot.message_handler(func = labmda message: message.text == "help")
+@bot.message_handler(func = lambda message: message.text == "help")
 def to_helper(message):
     helper(message)
 
@@ -57,20 +65,17 @@ def find(message):
     client.askFlag = True
     bot.send_message(message.chat.id, PHRASES.WAIT_FOR_QUESTION, parse_mode = 'HTML')
 
-@bot.message_handler(func = labmda message: message.text == "find")
+@bot.message_handler(func = lambda message: message.text == "find")
 def to_find(message):
-    helper(message)
+    find(message)
 
 @bot.message_handler(commands=['changerule'])
 def change(message):
     client = logIn(message.chat.id)
-    button1 = types.KeyboardButton("1")
-    button2 = types.KeyboardButton("2")
-    inputMarkup.add(button1, button2)
-    bot.send_message(message.chat.id, PHRASES.HOW_MANY_QUEST, reply_markup = inputMarkup, parse_mode = "HTML")
+        bot.send_message(message.chat.id, PHRASES.HOW_MANY_QUEST, reply_markup = inputMarkup, parse_mode = "HTML")
     client.howManyQuestFlag = True
 
-@bot.message_handler(func = labmda message: message.text == "changerule")
+@bot.message_handler(func = lambda message: message.text == "changerule")
 def to_change(message):
     change(message)
 
@@ -122,7 +127,7 @@ def lalala(message):
         if not client.updateQuestNum(message.text):
             pass 
         else:
-            bot.send_message(message.chat.id, PHRASES.SUCCESS_QUEST_MESSAGE, reply_markup = markup, parse_mode="HTML")
+            bot.send_message(message.chat.id, PHRASES.SUCCESS_QUEST_MESSAGE, parse_mode="HTML")
 
     elif client.howManyAnsFlag: 
         if not client.updateAnsNum(message.text):
