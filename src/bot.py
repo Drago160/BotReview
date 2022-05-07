@@ -1,7 +1,7 @@
 import telebot
 from telebot import types
 import src.config
-from src.bot_engine import Engine
+from src.botEngine import Engine
 import PHRASES
 import os
 from flask import Flask, request
@@ -94,7 +94,7 @@ def webhook():
     bot.set_webhook(url=APP_URL)
     return '!', 200
 
-def workError(message, client):
+def searchRequest(message, client):
     bot.send_message(message.chat.id, PHRASES.BEFORE, parse_mode="HTML")
     Ans = engine.find_answer_on_error(message.text, client.reqData)
     for part in Ans:
@@ -111,17 +111,13 @@ def workError(message, client):
                         isFirstAns = False
                 bot.send_message(message.chat.id, answer, reply_markup = markup, parse_mode = 'HTML')
  
-@bot.message_handler(func = labmda message: message.text == "start")
-def to_start(message):
-    start(message)
-
 @bot.message_handler(content_types=['text'])
-def lalala(message):
+def takeMessage(message):
 
     client = logIn(message.chat.id)
 
     if client.askFlag:
-        workError(message, client)
+        searchRequest(message, client)
         client.askFlag = False
     elif client.howManyQuestFlag:
         if not client.updateQuestNum(message.text):

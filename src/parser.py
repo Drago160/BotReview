@@ -17,7 +17,7 @@ class Parser:
 
 
     def find_answers(self, Error_name, reqData):
-        ip = Error_name + "python stacoverflow"
+        ip = Error_name + " stacoverflow"
         # Перебираем url'ы
         for url in search(ip, stop=reqData.questNum):
             # Если в названии есть наш сайт
