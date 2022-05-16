@@ -5,11 +5,14 @@ import src.Toolfunc as Toolfunc
 from src.dbParams import RequestData
 
 class Parser:
+    """Класс Парсер"""
 
     def __init__(self):
+    """Конструктор не принимает параметров"""
         pass
 
     def find_all_blocks(self, url):
+        """Ищет все теги div в которых содержаться ответы пользовательские на сайте"""
         page = requests.get(url)
         soup = BS(page.text, "html.parser")
         divs = soup.find_all("div", attrs= {"itemprop":"text"})
@@ -17,6 +20,7 @@ class Parser:
 
 
     def find_answers(self, Error_name, reqData):
+        """Обрабатывает запрос о поиске и по нему ищет необходимое кол-во запросов-ответов"""
         ip = Error_name + " stacoverflow"
         # Перебираем url'ы
         for url in search(ip, stop=reqData.questNum):

@@ -17,6 +17,7 @@ engine = Engine()
 
 clients = {} 
 
+#Клава с кнопочками вспомогательными
 markup = types.ReplyKeyboardMarkup(resize_keyboard=True)
 buttonStart = types.KeyboardButton("start")
 buttonFind = types.KeyboardButton("find")
@@ -24,7 +25,7 @@ buttonChangeRule = types.KeyboardButton("changerule")
 buttonHelp = types.KeyboardButton("help")
 markup.add(buttonStart, buttonFind, buttonChangeRule, buttonHelp)
 
-
+#Клава с кнопочками цифр
 inputMarkup = types.ReplyKeyboardMarkup(resize_keyboard=True)
 button1 = types.KeyboardButton("1")
 button2 = types.KeyboardButton("2")
@@ -34,54 +35,66 @@ button5 = types.KeyboardButton("5")
 inputMarkup.add(button1, button2, button3, button4, button5)
 
 def register(my_id):
+    """Регистрирует пользователя локально"""
     clients[my_id] = Client(my_id)
     return clients[my_id] 
 
 def logIn(id):
+    """Проверяет зарегистрирован ли юзер,
+    если нет - регистрирует"""
     if id in clients:
         return clients[id]
     else:
         return register(id)
 
 @bot.message_handler(commands=['start'])
+    """команда start"""
 def start(message):
     bot.reply_to(message, "Hello, " + message.from_user.first_name, reply_markup = markup)
 
 @bot.message_handler(func = lambda message: message.text == "start")
 def to_start(message):
+    """Кнопка start"""
     start(message)
 
 @bot.message_handler(commands=['help'])
 def helper(message):
+    """Команда /help"""
     bot.send_message(message.chat.id, PHRASES.HELP_MESSAGE, reply_markup = markup, parse_mode = 'HTML')
 
 @bot.message_handler(func = lambda message: message.text == "help")
 def to_helper(message):
+    """Кнопка help"""
     helper(message)
 
 @bot.message_handler(commands=['find'])
 def find(message):
+    """Команда /find"""
     client = logIn(message.chat.id)
     client.askFlag = True
     bot.send_message(message.chat.id, PHRASES.WAIT_FOR_QUESTION, parse_mode = 'HTML')
 
 @bot.message_handler(func = lambda message: message.text == "find")
 def to_find(message):
+    """Кнопка find"""
     find(message)
 
 @bot.message_handler(commands=['changerule'])
 def change(message):
+    """Команда /changerule"""
     client = logIn(message.chat.id)
     bot.send_message(message.chat.id, PHRASES.HOW_MANY_QUEST, reply_markup = inputMarkup, parse_mode = "HTML")
     client.howManyQuestFlag = True
 
 @bot.message_handler(func = lambda message: message.text == "changerule")
 def to_change(message):
+    """Кнопка changerule"""
     change(message)
 
 
 @server.route('/' + TOKEN, methods=['POST'])
 def get_message():
+    """Получение сообщения"""
     json_string = request.get_data().decode('utf-8')
     update = telebot.types.Update.de_json(json_string)
     bot.process_new_updates([update])
@@ -90,11 +103,13 @@ def get_message():
 
 @server.route('/')
 def webhook():
+    """Вебхук"""
     bot.remove_webhook()
     bot.set_webhook(url=APP_URL)
     return '!', 200
 
 def searchRequest(message, client):
+    """Находим Ответы по запросу"""
     bot.send_message(message.chat.id, PHRASES.BEFORE, parse_mode="HTML")
     Ans = engine.find_answer_on_error(message.text, client.reqData)
     for part in Ans:
@@ -113,7 +128,7 @@ def searchRequest(message, client):
  
 @bot.message_handler(content_types=['text'])
 def takeMessage(message):
-
+    """Получаем сообщение в телеге"""
     client = logIn(message.chat.id)
 
     if client.askFlag:
