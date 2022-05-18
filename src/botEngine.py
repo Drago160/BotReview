@@ -19,5 +19,5 @@ class Engine():
         """Метод ищет ответ по запросу find"""
         for answers_tag in self.parser.find_answers(error_name, reqData):
             yield (str_sum(self.handler.handle_answer_list(answer)) for answer in answers_tag)
-
+            
 

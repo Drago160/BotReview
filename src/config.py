@@ -1,2 +1,3 @@
 TOKEN = "Your Token"
-APP_URL = f"your app adress{TOKEN}" #on my heroku it is: f'https://reviewshybot.herokuapp.com/{TOKEN}'
+APP_URL = f'https://(your app name on HEROKU).herokuapp.com/{TOKEN}' 
+

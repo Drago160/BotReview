@@ -1,11 +1,11 @@
 import src.Toolfunc as Toolfunc
 import re
-import CONSTANT.py
+import CONSTANT
 class Handler:
     """Класс для обработки ответов с сайта"""
 
     def __init__(self):
-    """Конструктор не принимает параметров"""
+        """Конструктор не принимает параметров"""
         pass
 
     def cleanStrFromTag(self, string, tag):

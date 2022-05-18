@@ -12,7 +12,6 @@ APP_URL = src.config.APP_URL
 
 bot = telebot.TeleBot(TOKEN)
 
-server = Flask(__name__)
 engine = Engine()
 
 clients = {} 
@@ -48,8 +47,8 @@ def logIn(id):
         return register(id)
 
 @bot.message_handler(commands=['start'])
-    """команда start"""
 def start(message):
+    """команда start"""
     bot.reply_to(message, "Hello, " + message.from_user.first_name, reply_markup = markup)
 
 @bot.message_handler(func = lambda message: message.text == "start")
@@ -91,23 +90,6 @@ def to_change(message):
     """Кнопка changerule"""
     change(message)
 
-
-@server.route('/' + TOKEN, methods=['POST'])
-def get_message():
-    """Получение сообщения"""
-    json_string = request.get_data().decode('utf-8')
-    update = telebot.types.Update.de_json(json_string)
-    bot.process_new_updates([update])
-    return '!', 200
-
-
-@server.route('/')
-def webhook():
-    """Вебхук"""
-    bot.remove_webhook()
-    bot.set_webhook(url=APP_URL)
-    return '!', 200
-
 def searchRequest(message, client):
     """Находим Ответы по запросу"""
     bot.send_message(message.chat.id, PHRASES.BEFORE, parse_mode="HTML")
@@ -144,5 +126,32 @@ def takeMessage(message):
         if not client.updateAnsNum(message.text):
             pass 
         else:
-            bot.send_message(message.chat.id, PHRASES.SUCCESS_ANS_MESSAGE, reply_markup = markup, parse_mode = "HTML") 
+            bot.send_message(message.chat.id, PHRASES.SUCCESS_ANS_MESSAGE, reply_markup = markup, parse_mode = "HTML")
+
+
+
+#Тут мы смотрим если это Хероку, то делаем Webhook, иначе локально поллинг
+
+if "HEROKU" in list(os.environ.keys()):
+
+    server = Flask(__name__)
+
+    @server.route('/' + TOKEN, methods=['POST'])
+    def get_message():
+        """Получение сообщения"""
+        json_string = request.get_data().decode('utf-8')
+        update = telebot.types.Update.de_json(json_string)
+        bot.process_new_updates([update])
+        return '!', 200
+
+    @server.route('/')
+    def webhook():
+        """Вебхук"""
+        bot.remove_webhook()
+        bot.set_webhook(url=APP_URL)
+        return '!', 200
+    Heroku_running_flag = True
+else:
+    bot.remove_webhook()
+    Heroku_running_flag = False 
 
