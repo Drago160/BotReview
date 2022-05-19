@@ -12,7 +12,7 @@ cd BotReview
 git checkout dev
 Зайдите в src/config.py и поставьте туда токен вашего бота    
 Введите:   
-pip install -r requirements.txt
+pip install -r requirements.txt   
 python3 main.py   
 
 ## Для теста бота можно например прописать   
