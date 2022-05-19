@@ -17,7 +17,7 @@
 ### /start - она вас попреветствует ![Image alt](https://github.com/Drago160/tmprepos/blob/main/start.png)   
 ### Напишите /help - Она подскажет какие команды есть ![Image alt](https://github.com/Drago160/tmprepos/blob/main/help.png)   
 ### /find - она будет ожидвать от вас запроса для поиска на сайте ![Image alt](https://github.com/Drago160/tmprepos/blob/main/question_find1.png)    
-### Введите для примера: TypeError, тогда она найдет для вас информацию на stackoverflow про TypeError ![Image alt](https://github.com/Drago160/tmprepos/blob/main/answer1.png)    
+### Посмотрите какие ответы она для вас нашла ![Image alt](https://github.com/Drago160/tmprepos/blob/main/answer1.png)    
 ### /changerule - Введите если вы хотите изменить число запросов/ответов  ![Image alt](https://github.com/Drago160/tmprepos/blob/main/changes.png)   
 ### 1 - вы говорите ей что вам нужно искать ровно 1 запрос   
 ### 1 - на каждый запрос нужно смотреть только первые 1 ответа   
