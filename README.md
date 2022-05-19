@@ -15,8 +15,9 @@ git checkout dev
 pip install -r requirements.txt   
 python3 main.py   
 
-## Для теста бота можно например прописать   
-/start - она вас попреветствует ![Image alt](https://github.com/Drago160/tmprepos/blob/main/start.png)   
+## Для теста бота можно например прописать    
+/start - она вас попреветствует   
+![Image alt](https://github.com/Drago160/tmprepos/blob/main/start.png)   
 Напишите /help - Она подскажет какие команды есть ![Image alt](https://github.com/Drago160/tmprepos/blob/main/help.png)   
 /find - она будет ожидвать от вас запроса для поиска на сайте ![Image alt](https://github.com/Drago160/tmprepos/blob/main/question_find1.png)    
 Посмотрите какие ответы она для вас нашла ![Image alt](https://github.com/Drago160/tmprepos/blob/main/answer1.png)    
