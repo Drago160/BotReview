@@ -23,7 +23,7 @@ class Parser:
         """Обрабатывает запрос о поиске и по нему ищет необходимое кол-во запросов-ответов"""
         ip = Error_name + " stacoverflow"
         # Перебираем url'ы
-        for url in search(ip, stop=reqData.questNum):
+        for url in search(ip, stop=reqData.questNum+1):
             # Если в названии есть наш сайт
             if url.find("stackoverflow"): 
                 # Находим все интересные нам блоки
