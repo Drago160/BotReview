@@ -9,7 +9,8 @@
 Введите:    
 git clone git@github.com:Drago160/BotReview.git    
 cd BotReview    
-git checkout dev     
+git checkout dev   
+ 
 Зайдите в src/config.py и поставьте туда токен вашего бота    
 Введите:   
 pip install -r requirements.txt   
