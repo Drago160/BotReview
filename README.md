@@ -4,13 +4,13 @@
 
 Запускать его не нужно он залит на heroku и там работает на web hook   
 
-# Для лакального запуска можно:   
-Зайдите в папку куда хотите поставит проект   
-Введите:   
-git clone git@github.com:Drago160/BotReview.git   
+# Для лакального запуска можно:    
+Зайдите в папку куда хотите поставит проект    
+Введите:    
+git clone git@github.com:Drago160/BotReview.git    
 cd BotReview    
-git checkout dev    
-Зайдите в src/config.py и поставьте туда токен вашего бота   
+git checkout dev     
+Зайдите в src/config.py и поставьте туда токен вашего бота    
 Введите:   
 pip install -r requirements.txt   
 python3 main.py   
